@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte Consolidado Novedades de Rutas — Mayo 2026 | Fricar S.A.S.</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 14px;
+    color: #1A1A1A;
+    background: #F5F5F5;
+    line-height: 1.5;
+  }
+  @media print {
+    body { background: #fff; font-size: 11px; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    table { page-break-inside: avoid; }
+    .kpi-grid { page-break-inside: avoid; }
+    details { display: block; }
+    details[open] summary::after { content: ''; }
+    .section { page-break-inside: avoid; }
+  }
+
+  /* HEADER */
+  .header {
+    background: #003764;
+    color: #fff;
+    padding: 24px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .header-logo {
+    display: flex;
+    align-items: center;
+  }
+  .header-logo img {
+    height: 70px;
+    filter: brightness(0) invert(1);
+    background: transparent;
+    mix-blend-mode: multiply;
+  }
+  .header-info {
+    text-align: right;
+  }
+  .header-info h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+  }
+  .header-info p {
+    font-size: 12px;
+    opacity: 0.85;
+  }
+  .header-badge {
+    background: #E30613;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 3px;
+    margin-top: 6px;
+    display: inline-block;
+  }
+
+  /* MAIN */
+  .main { padding: 28px 36px; max-width: 1400px; margin: 0 auto; }
+
+  /* SECTION */
+  .section {
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .section-title {
+    background: #003764;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .section-body { padding: 20px; }
+
+  /* KPI GRID */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    padding: 20px;
+  }
+  .kpi-card {
+    border-radius: 6px;
+    padding: 18px 16px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+  }
+  .kpi-card.verde { border-top: 4px solid #2e7d32; }
+  .kpi-card.amarillo { border-top: 4px solid #f57f17; }
+  .kpi-card.rojo { border-top: 4px solid #E30613; }
+  .kpi-value {
+    font-size: 26px;
+    font-weight: 800;
+    color: #003764;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .kpi-label {
+    font-size: 11px;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 6px;
+  }
+  .kpi-var {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+  .kpi-var.pos { background: #e8f5e9; color: #2e7d32; }
+  .kpi-var.neg { background: #FDECEA; color: #E30613; }
+  .kpi-var.neu { background: #e3f2fd; color: #1565c0; }
+
+  /* BULLETS */
+  .bullets { list-style: none; padding: 0; }
+  .bullets li {
+    padding: 10px 16px;
+    border-left: 4px solid #003764;
+    margin-bottom: 10px;
+    background: #F5F5F5;
+    border-radius: 0 4px 4px 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .bullets li.alerta { border-left-color: #E30613; background: #FDECEA; }
+  .bullets li.ok { border-left-color: #2e7d32; background: #e8f5e9; }
+  .bullets li strong { color: #003764; }
+  .bullets li.alerta strong { color: #E30613; }
+  .bullets li.ok strong { color: #2e7d32; }
+
+  /* TABLES */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  thead th {
+    background: #003764;
+    color: #fff;
+    padding: 9px 10px;
+    text-align: center;
+    font-size: 10.5px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  thead th.left { text-align: left; }
+  tbody tr:nth-child(odd) { background: #F5F5F5; }
+  tbody tr:nth-child(even) { background: #fff; }
+  tbody td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #e8e8e8;
+    text-align: right;
+    white-space: nowrap;
+  }
+  tbody td.left { text-align: left; }
+  tbody tr.critico td { background: #FDECEA !important; color: #c62828; font-weight: 600; }
+  tbody tr.excelente td { background: #e8f5e9 !important; }
+  tfoot td {
+    background: #003764 !important;
+    color: #fff;
+    font-weight: 700;
+    padding: 8px 10px;
+    text-align: right;
+    border: none;
+  }
+  tfoot td.left { text-align: left; }
+
+  /* SEMAFORO BADGE */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 10.5px;
+  }
+  .badge.verde { background: #c8e6c9; color: #2e7d32; }
+  .badge.amarillo { background: #fff9c4; color: #f57f17; }
+  .badge.rojo { background: #ffcdd2; color: #c62828; }
+
+  /* BAR CHART */
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; font-size: 11px; }
+  .bar-label { width: 80px; text-align: right; color: #555; font-size: 10.5px; white-space: nowrap; }
+  .bar-track { flex: 1; background: #e0e0e0; border-radius: 3px; height: 16px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; background: #003764; transition: width 0.3s; }
+  .bar-fill.rojo { background: #E30613; }
+  .bar-fill.verde { background: #2e7d32; }
+  .bar-val { width: 90px; font-weight: 600; color: #003764; font-size: 10.5px; }
+
+  /* ANALYSIS */
+  .analysis-box {
+    background: #F5F5F5;
+    border-left: 4px solid #003764;
+    padding: 16px 20px;
+    border-radius: 0 4px 4px 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #333;
+  }
+
+  /* COLLAPSIBLE */
+  details { border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; }
+  summary {
+    background: #003764;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  summary::before { content: '▶'; font-size: 10px; }
+  details[open] summary::before { content: '▼'; }
+
+  /* TWO COLUMNS */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(2,1fr); } .two-col { grid-template-columns: 1fr; } }
+
+  /* FOOTER */
+  .footer {
+    background: #003764;
+    color: rgba(255,255,255,0.75);
+    text-align: center;
+    padding: 14px 36px;
+    font-size: 11px;
+    margin-top: 32px;
+  }
+  .footer strong { color: #fff; }
+
+  /* Sub-table title */
+  .sub-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #003764;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #003764;
+  }
+
+  .divider { border: none; border-top: 1px solid #e0e0e0; margin: 20px 0; }
+  .highlight-red { color: #E30613; font-weight: 700; }
+  .highlight-green { color: #2e7d32; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-logo">
+    <img src="data:image/png;base64,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" alt="Fricar S.A.S." />
+  </div>
+  <div style="flex:1; padding-left: 30px;">
+    <div style="font-size:11px; opacity:0.7; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px;">Dirección Logística — Business Intelligence</div>
+    <h1 style="font-size:22px; font-weight:800; color:#fff; margin:0 0 4px 0;">Reporte Consolidado de Novedades de Rutas</h1>
+    <div style="font-size:13px; opacity:0.85;">Período analizado: 2 de mayo al 9 de mayo de 2026 &nbsp;|&nbsp; 7 días operados</div>
+  </div>
+  <div class="header-info">
+    <div class="header-badge">MAYO 2026</div>
+    <p style="margin-top:8px;">Generado: 11 de mayo de 2026</p>
+    <p>Fricar S.A.S. &mdash; Productos Cárnicos</p>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- BLOQUE 1: KPIs -->
+  <div class="section">
+    <div class="section-title">&#9642; Indicadores Clave de Desempeño — Acumulado Mayo 2–9</div>
+    <div class="kpi-grid">
+      <div class="kpi-card verde">
+        <div class="kpi-label">Ingreso Entregado</div>
+        <div class="kpi-value">$1.539M</div>
+        <div style="font-size:11px; color:#555; margin-bottom:6px;">millones COP</div>
+        <span class="kpi-var neu">vs. potencial $1.556M</span>
+      </div>
+      <div class="kpi-card verde">
+        <div class="kpi-label">Cumplimiento de Ingreso</div>
+        <div class="kpi-value">98.9%</div>
+        <div style="font-size:11px; color:#555; margin-bottom:6px;">de ingreso potencial</div>
+        <span class="kpi-var pos">&#9650; Sobre meta ≥97%</span>
+      </div>
+      <div class="kpi-card verde">
+        <div class="kpi-label">Eficiencia de Entregas</div>
+        <div class="kpi-value">98.3%</div>
+        <div style="font-size:11px; color:#555; margin-bottom:6px;">4.064 / 4.136 entregas</div>
+        <span class="kpi-var pos">&#9650; Sobre meta ≥97%</span>
+      </div>
+      <div class="kpi-card amarillo">
+        <div class="kpi-label">Novedades Registradas</div>
+        <div class="kpi-value">65</div>
+        <div style="font-size:11px; color:#555; margin-bottom:6px;">en 7 días | 18 rutas</div>
+        <span class="kpi-var neg">&#9660; LKL033: 18 nov.</span>
+      </div>
+      <div class="kpi-card amarillo">
+        <div class="kpi-label">Devoluciones (N/E)</div>
+        <div class="kpi-value">1.120</div>
+        <div style="font-size:11px; color:#555; margin-bottom:6px;">unidades / 398 registros</div>
+        <span class="kpi-var neg">Principal: Agotado</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOQUE 2: HALLAZGOS -->
+  <div class="section">
+    <div class="section-title">&#9642; Hallazgos Clave — Lo que la Gerencia Debe Saber</div>
+    <div class="section-body">
+      <ul class="bullets">
+        <li class="ok"><strong>Cumplimiento de ingreso consolidado en 98.9%:</strong> el acumulado de 7 días operados superó la meta mínima del 97%, con $1.539 millones COP entregados sobre un potencial de $1.556 millones.</li>
+        <li class="alerta"><strong>Ruta LKL033 concentra el 28% de todas las novedades:</strong> con 18 novedades acumuladas en 7 días, es la ruta de mayor riesgo; su eficiencia de entregas (95.7%) es la más baja del consolidado y está por debajo del umbral del 97%.</li>
+        <li class="alerta"><strong>El "Sin Dinero" es la principal causa de novedad operativa:</strong> se presentaron 22 eventos de Sin Dinero y 14 No Recibe en el período, representando el 55% de todas las novedades de canal.</li>
+        <li class="alerta"><strong>"Agotado" lidera con 97 registros en devoluciones:</strong> es la causal más frecuente en la hoja de novedades efectivas, seguida de Sin Dinero (60) y Cerrado (57); la Tocineta Fricar x 125g es el producto con más devoluciones (65 registros).</li>
+        <li><strong>El 8 de mayo registró el menor cumplimiento diario (97.8%):</strong> con 24 novedades en un solo día y la mayor pérdida de ingreso del período ($5.789 millones COP no entregados), fue el día de mayor impacto negativo de la semana.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- BLOQUE 3: TABLAS -->
+  <div class="section">
+    <div class="section-title">&#9642; Tablas de Detalle</div>
+    <div class="section-body">
+
+      <!-- Tabla por ruta -->
+      <div class="sub-title">Consolidado por Ruta — Acumulado 2 al 9 de Mayo</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="left">Ruta</th>
+              <th>Ent. Potenciales</th>
+              <th>Ent. Efectivas</th>
+              <th>Eficiencia</th>
+              <th>Ingreso Potencial</th>
+              <th>Ingreso Entregado</th>
+              <th>Cumpl. Ingreso</th>
+              <th>Novedades</th>
+              <th>Sin Dinero</th>
+              <th>No Recibe</th>
+              <th>KG Entregados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="excelente">
+              <td class="left">STY811</td><td>8</td><td>8</td>
+              <td><span class="badge verde">100.0%</span></td>
+              <td>$140.885.376</td><td>$140.885.376</td>
+              <td><span class="badge verde">100.0%</span></td>
+              <td>0</td><td>0</td><td>0</td><td>4.919</td>
+            </tr>
+            <tr>
+              <td class="left">JYN677</td><td>168</td><td>166</td>
+              <td><span class="badge verde">98.8%</span></td>
+              <td>$126.365.744</td><td>$125.326.439</td>
+              <td><span class="badge verde">99.2%</span></td>
+              <td>2</td><td>1</td><td>0</td><td>6.125</td>
+            </tr>
+            <tr class="critico">
+              <td class="left">LKL721 &#9888;</td><td>161</td><td>156</td>
+              <td><span class="badge rojo">96.9%</span></td>
+              <td>$126.473.429</td><td>$121.670.010</td>
+              <td><span class="badge rojo">96.2%</span></td>
+              <td>3</td><td>1</td><td>2</td><td>7.195</td>
+            </tr>
+            <tr class="excelente">
+              <td class="left">TNG910</td><td>86</td><td>86</td>
+              <td><span class="badge verde">100.0%</span></td>
+              <td>$109.164.093</td><td>$108.887.776</td>
+              <td><span class="badge verde">99.7%</span></td>
+              <td>0</td><td>0</td><td>0</td><td>5.546</td>
+            </tr>
+            <tr>
+              <td class="left">LKL720</td><td>349</td><td>343</td>
+              <td><span class="badge verde">98.3%</span></td>
+              <td>$104.620.348</td><td>$103.749.407</td>
+              <td><span class="badge verde">99.2%</span></td>
+              <td>6</td><td>3</td><td>0</td><td>5.081</td>
+            </tr>
+            <tr>
+              <td class="left">TDZ318</td><td>212</td><td>209</td>
+              <td><span class="badge verde">98.6%</span></td>
+              <td>$98.987.790</td><td>$98.035.601</td>
+              <td><span class="badge verde">99.0%</span></td>
+              <td>2</td><td>2</td><td>0</td><td>4.925</td>
+            </tr>
+            <tr>
+              <td class="left">LKL714</td><td>396</td><td>395</td>
+              <td><span class="badge verde">99.7%</span></td>
+              <td>$96.301.049</td><td>$95.908.959</td>
+              <td><span class="badge verde">99.6%</span></td>
+              <td>1</td><td>0</td><td>1</td><td>5.214</td>
+            </tr>
+            <tr class="critico">
+              <td class="left">LKL033 &#9888;</td><td>421</td><td>403</td>
+              <td><span class="badge rojo">95.7%</span></td>
+              <td>$96.444.298</td><td>$95.189.371</td>
+              <td><span class="badge amarillo">98.7%</span></td>
+              <td>18</td><td>5</td><td>0</td><td>4.702</td>
+            </tr>
+            <tr>
+              <td class="left">LKL713</td><td>346</td><td>341</td>
+              <td><span class="badge verde">98.6%</span></td>
+              <td>$95.033.998</td><td>$93.338.328</td>
+              <td><span class="badge verde">98.2%</span></td>
+              <td>2</td><td>0</td><td>0</td><td>4.945</td>
+            </tr>
+            <tr>
+              <td class="left">EQT847</td><td>358</td><td>352</td>
+              <td><span class="badge verde">98.3%</span></td>
+              <td>$79.583.493</td><td>$78.938.921</td>
+              <td><span class="badge verde">99.2%</span></td>
+              <td>6</td><td>1</td><td>1</td><td>3.653</td>
+            </tr>
+            <tr>
+              <td class="left">LKL034</td><td>396</td><td>390</td>
+              <td><span class="badge verde">98.5%</span></td>
+              <td>$79.011.082</td><td>$78.289.499</td>
+              <td><span class="badge verde">99.1%</span></td>
+              <td>6</td><td>2</td><td>1</td><td>3.950</td>
+            </tr>
+            <tr class="excelente">
+              <td class="left">WLW560</td><td>21</td><td>21</td>
+              <td><span class="badge verde">100.0%</span></td>
+              <td>$75.521.762</td><td>$75.793.118</td>
+              <td><span class="badge verde">100.4%</span></td>
+              <td>0</td><td>0</td><td>0</td><td>4.704</td>
+            </tr>
+            <tr class="excelente">
+              <td class="left">EQT844</td><td>240</td><td>237</td>
+              <td><span class="badge verde">98.8%</span></td>
+              <td>$74.360.161</td><td>$74.519.999</td>
+              <td><span class="badge verde">100.2%</span></td>
+              <td>3</td><td>1</td><td>1</td><td>3.466</td>
+            </tr>
+            <tr>
+              <td class="left">NNL906</td><td>237</td><td>234</td>
+              <td><span class="badge verde">98.7%</span></td>
+              <td>$68.925.340</td><td>$67.841.827</td>
+              <td><span class="badge verde">98.4%</span></td>
+              <td>3</td><td>0</td><td>0</td><td>2.947</td>
+            </tr>
+            <tr>
+              <td class="left">LKL715</td><td>221</td><td>216</td>
+              <td><span class="badge amarillo">97.7%</span></td>
+              <td>$67.860.245</td><td>$66.415.932</td>
+              <td><span class="badge amarillo">97.9%</span></td>
+              <td>5</td><td>1</td><td>1</td><td>2.740</td>
+            </tr>
+            <tr>
+              <td class="left">LKL719</td><td>235</td><td>231</td>
+              <td><span class="badge verde">98.3%</span></td>
+              <td>$55.499.470</td><td>$54.896.600</td>
+              <td><span class="badge verde">98.9%</span></td>
+              <td>4</td><td>2</td><td>0</td><td>2.711</td>
+            </tr>
+            <tr>
+              <td class="left">NNL648</td><td>278</td><td>273</td>
+              <td><span class="badge verde">98.2%</span></td>
+              <td>$50.415.562</td><td>$48.690.328</td>
+              <td><span class="badge rojo">96.6%</span></td>
+              <td>4</td><td>3</td><td>0</td><td>2.059</td>
+            </tr>
+            <tr class="excelente">
+              <td class="left">TERCERO</td><td>3</td><td>3</td>
+              <td><span class="badge verde">100.0%</span></td>
+              <td>$10.423.029</td><td>$10.423.029</td>
+              <td><span class="badge verde">100.0%</span></td>
+              <td>0</td><td>0</td><td>0</td><td>453</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="left">TOTAL CONSOLIDADO</td>
+              <td>4.136</td><td>4.064</td>
+              <td>98.3%</td>
+              <td>$1.555.876.273</td>
+              <td>$1.538.800.519</td>
+              <td>98.9%</td>
+              <td>65</td><td>22</td><td>7</td><td>75.336 kg</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Tabla por día -->
+      <div class="sub-title" style="margin-top:20px;">Desempeño Diario — 2 al 9 de Mayo de 2026</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="left">Fecha</th>
+              <th>Ent. Potenciales</th>
+              <th>Ent. Efectivas</th>
+              <th>Eficiencia</th>
+              <th>Ingreso Potencial</th>
+              <th>Ingreso Entregado</th>
+              <th>Cumpl. Ingreso</th>
+              <th>Pérdida COP</th>
+              <th>Novedades</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="left">Sáb 02/05/2026</td><td>619</td><td>610</td>
+              <td><span class="badge verde">98.5%</span></td>
+              <td>$163.945.384</td><td>$162.064.464</td>
+              <td><span class="badge verde">98.9%</span></td>
+              <td class="highlight-red">-$1.880.920</td><td>6</td>
+            </tr>
+            <tr>
+              <td class="left">Lun 04/05/2026</td><td>451</td><td>442</td>
+              <td><span class="badge verde">98.0%</span></td>
+              <td>$129.112.243</td><td>$127.199.709</td>
+              <td><span class="badge verde">98.5%</span></td>
+              <td class="highlight-red">-$1.912.534</td><td>8</td>
+            </tr>
+            <tr>
+              <td class="left">Mar 05/05/2026</td><td>655</td><td>645</td>
+              <td><span class="badge verde">98.5%</span></td>
+              <td>$235.951.832</td><td>$234.721.663</td>
+              <td><span class="badge verde">99.5%</span></td>
+              <td class="highlight-red">-$1.230.169</td><td>10</td>
+            </tr>
+            <tr>
+              <td class="left">Mié 06/05/2026</td><td>665</td><td>654</td>
+              <td><span class="badge verde">98.3%</span></td>
+              <td>$218.241.501</td><td>$217.055.040</td>
+              <td><span class="badge verde">99.5%</span></td>
+              <td class="highlight-red">-$1.186.461</td><td>11</td>
+            </tr>
+            <tr>
+              <td class="left">Jue 07/05/2026</td><td>644</td><td>632</td>
+              <td><span class="badge verde">98.1%</span></td>
+              <td>$330.462.194</td><td>$327.171.072</td>
+              <td><span class="badge verde">99.0%</span></td>
+              <td class="highlight-red">-$3.291.122</td><td>10</td>
+            </tr>
+            <tr class="critico">
+              <td class="left">Vie 08/05/2026 &#9888;</td><td>585</td><td>572</td>
+              <td><span class="badge amarillo">97.8%</span></td>
+              <td>$265.362.048</td><td>$259.573.368</td>
+              <td><span class="badge amarillo">97.8%</span></td>
+              <td class="highlight-red">-$5.788.680</td><td>24</td>
+            </tr>
+            <tr>
+              <td class="left">Sáb 09/05/2026</td><td>517</td><td>509</td>
+              <td><span class="badge verde">98.5%</span></td>
+              <td>$212.801.075</td><td>$211.015.205</td>
+              <td><span class="badge verde">99.2%</span></td>
+              <td class="highlight-red">-$1.785.870</td><td>8</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="left">TOTAL PERÍODO</td>
+              <td>4.136</td><td>4.064</td>
+              <td>98.3%</td>
+              <td>$1.555.876.277</td>
+              <td>$1.538.800.521</td>
+              <td>98.9%</td>
+              <td>-$17.075.756</td>
+              <td>77</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Tabla devoluciones -->
+      <div class="two-col" style="margin-top:20px;">
+        <div>
+          <div class="sub-title">Top 5 Causales — Devoluciones N/E (abr 30 - may 8)</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th class="left">Causal</th><th>Registros</th><th>Participación</th></tr></thead>
+              <tbody>
+                <tr class="critico"><td class="left">AGOTADO</td><td>97</td><td>24.4%</td></tr>
+                <tr><td class="left">SIN DINERO</td><td>60</td><td>15.1%</td></tr>
+                <tr><td class="left">CERRADO</td><td>57</td><td>14.3%</td></tr>
+                <tr><td class="left">NO PIDIO</td><td>48</td><td>12.1%</td></tr>
+                <tr><td class="left">PÉRDIDA DE VACÍO</td><td>44</td><td>11.1%</td></tr>
+              </tbody>
+              <tfoot><tr><td class="left">TOTAL (Top 5)</td><td>306</td><td>76.9%</td></tr></tfoot>
+            </table>
+          </div>
+        </div>
+        <div>
+          <div class="sub-title">Top 5 Productos con Más Devoluciones</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th class="left">Producto</th><th>Registros devol.</th></tr></thead>
+              <tbody>
+                <tr class="critico"><td class="left">TOCINETA FRICAR x 125g</td><td>65</td></tr>
+                <tr><td class="left">TOCINETA MAGRET 400G</td><td>22</td></tr>
+                <tr><td class="left">MORTADELA 230g</td><td>19</td></tr>
+                <tr><td class="left">JAMÓN SANDUCHE 450g</td><td>15</td></tr>
+                <tr><td class="left">BUTIFARRA MAGRET 800g</td><td>14</td></tr>
+              </tbody>
+              <tfoot><tr><td class="left">Total unidades devueltas</td><td>1.120</td></tr></tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Rutas críticas destacadas -->
+      <div class="sub-title" style="margin-top:20px;">Rutas con Desempeño Crítico (eficiencia &lt; 97%)</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="left">Ruta</th>
+              <th>Efic. Entregas</th>
+              <th>Cumpl. Ingreso</th>
+              <th>Novedades</th>
+              <th>Sin Dinero</th>
+              <th>No Recibe</th>
+              <th>Ingreso Entregado</th>
+              <th>Ingreso No Entregado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="critico">
+              <td class="left">LKL033 &#9888;</td>
+              <td><span class="badge rojo">95.7%</span></td>
+              <td><span class="badge amarillo">98.7%</span></td>
+              <td>18</td><td>5</td><td>0</td>
+              <td>$95.189.371</td><td class="highlight-red">-$1.254.927</td>
+            </tr>
+            <tr class="critico">
+              <td class="left">LKL721 &#9888;</td>
+              <td><span class="badge rojo">96.9%</span></td>
+              <td><span class="badge rojo">96.2%</span></td>
+              <td>3</td><td>1</td><td>2</td>
+              <td>$121.670.010</td><td class="highlight-red">-$4.803.419</td>
+            </tr>
+            <tr>
+              <td class="left">NNL648</td>
+              <td><span class="badge verde">98.2%</span></td>
+              <td><span class="badge rojo">96.6%</span></td>
+              <td>4</td><td>3</td><td>0</td>
+              <td>$48.690.328</td><td class="highlight-red">-$1.725.234</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BLOQUE 4: ANÁLISIS VISUAL -->
+  <div class="section">
+    <div class="section-title">&#9642; Visualización — Ingreso Entregado por Día</div>
+    <div class="section-body">
+      <div style="margin-bottom:16px;">
+        <div class="bar-row"><span class="bar-label">02/05</span><div class="bar-track"><div class="bar-fill verde" style="width:49.5%"></div></div><span class="bar-val">$162.064.464</span></div>
+        <div class="bar-row"><span class="bar-label">04/05</span><div class="bar-track"><div class="bar-fill" style="width:38.8%"></div></div><span class="bar-val">$127.199.709</span></div>
+        <div class="bar-row"><span class="bar-label">05/05</span><div class="bar-track"><div class="bar-fill verde" style="width:71.7%"></div></div><span class="bar-val">$234.721.663</span></div>
+        <div class="bar-row"><span class="bar-label">06/05</span><div class="bar-track"><div class="bar-fill" style="width:66.3%"></div></div><span class="bar-val">$217.055.040</span></div>
+        <div class="bar-row"><span class="bar-label">07/05</span><div class="bar-track"><div class="bar-fill verde" style="width:100%"></div></div><span class="bar-val" style="color:#2e7d32;font-weight:800;">$327.171.072 &#9650;</span></div>
+        <div class="bar-row"><span class="bar-label">08/05</span><div class="bar-track"><div class="bar-fill rojo" style="width:79.4%"></div></div><span class="bar-val" style="color:#E30613;">$259.573.368 &#9660;</span></div>
+        <div class="bar-row"><span class="bar-label">09/05</span><div class="bar-track"><div class="bar-fill" style="width:64.5%"></div></div><span class="bar-val">$211.015.205</span></div>
+      </div>
+      <div style="display:flex; gap:20px; font-size:11px; color:#666;">
+        <span>&#9632; <span style="color:#2e7d32">Mejor día</span></span>
+        <span>&#9632; <span style="color:#E30613">Día crítico</span></span>
+        <span>&#9632; <span style="color:#003764">Días regulares</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANÁLISIS VISUAL NOVEDADES POR RUTA -->
+  <div class="section">
+    <div class="section-title">&#9642; Visualización — Novedades Acumuladas por Ruta (Top 8)</div>
+    <div class="section-body">
+      <div class="bar-row"><span class="bar-label">LKL033</span><div class="bar-track"><div class="bar-fill rojo" style="width:100%"></div></div><span class="bar-val" style="color:#E30613;font-weight:800;">18 &#9888;</span></div>
+      <div class="bar-row"><span class="bar-label">LKL720</span><div class="bar-track"><div class="bar-fill" style="width:33.3%"></div></div><span class="bar-val">6</span></div>
+      <div class="bar-row"><span class="bar-label">EQT847</span><div class="bar-track"><div class="bar-fill" style="width:33.3%"></div></div><span class="bar-val">6</span></div>
+      <div class="bar-row"><span class="bar-label">LKL034</span><div class="bar-track"><div class="bar-fill" style="width:33.3%"></div></div><span class="bar-val">6</span></div>
+      <div class="bar-row"><span class="bar-label">LKL715</span><div class="bar-track"><div class="bar-fill" style="width:27.8%"></div></div><span class="bar-val">5</span></div>
+      <div class="bar-row"><span class="bar-label">LKL719</span><div class="bar-track"><div class="bar-fill" style="width:22.2%"></div></div><span class="bar-val">4</span></div>
+      <div class="bar-row"><span class="bar-label">NNL648</span><div class="bar-track"><div class="bar-fill" style="width:22.2%"></div></div><span class="bar-val">4</span></div>
+      <div class="bar-row"><span class="bar-label">EQT844</span><div class="bar-track"><div class="bar-fill" style="width:16.7%"></div></div><span class="bar-val">3</span></div>
+    </div>
+  </div>
+
+  <!-- BLOQUE 4: ANÁLISIS Y CONTEXTO -->
+  <div class="section">
+    <div class="section-title">&#9642; Análisis y Contexto</div>
+    <div class="section-body">
+      <div class="analysis-box">
+        Durante los 7 días operados del 2 al 9 de mayo de 2026, Fricar registró un cumplimiento de ingreso del 98.9% y una eficiencia de entregas del 98.3%, ambos indicadores por encima del umbral mínimo del 97%. El jueves 7 de mayo fue el día de mayor facturación ($327 millones entregados), mientras que el viernes 8 concentró el 34% de las novedades semanales y la mayor pérdida de ingreso diario ($5.8 millones). La ruta LKL033 es la más crítica en novedades acumuladas (18), con eficiencia de entregas en 95.7%, única ruta por debajo del umbral mínimo. En devoluciones, la causal Agotado representa el 24% del total, y la Tocineta Fricar x 125g encabeza los productos devueltos con 65 registros.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+  <!-- BLOQUE: GASTO POR RUTA -->
+  <div class="section">
+    <div class="section-title">&#9642; Gasto por Ruta — Costo Logístico Acumulado 2 al 9 de Mayo</div>
+    <div class="section-body">
+
+      <div class="sub-title">Detalle de Costo por Ruta vs. Ingreso Entregado</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="left">Ruta</th>
+              <th>Días Operados</th>
+              <th>Costo Total Ruta</th>
+              <th>Costo Promedio / Día</th>
+              <th>Ingreso Entregado</th>
+              <th>% Costo / Ingreso</th>
+              <th>Eficiencia Costo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="left">STY811</td><td>3</td>
+              <td>$769.146</td><td>$256.382</td>
+              <td>$140.885.376</td>
+              <td><span class="badge verde">0.55%</span></td>
+              <td><span class="badge verde">Óptima</span></td>
+            </tr>
+            <tr>
+              <td class="left">TNG910</td><td>6</td>
+              <td>$1.382.140</td><td>$230.357</td>
+              <td>$108.887.776</td>
+              <td><span class="badge verde">1.27%</span></td>
+              <td><span class="badge verde">Óptima</span></td>
+            </tr>
+            <tr>
+              <td class="left">JYN677</td><td>7</td>
+              <td>$1.881.230</td><td>$268.747</td>
+              <td>$125.326.439</td>
+              <td><span class="badge verde">1.50%</span></td>
+              <td><span class="badge verde">Óptima</span></td>
+            </tr>
+            <tr>
+              <td class="left">LKL721</td><td>7</td>
+              <td>$2.169.319</td><td>$309.903</td>
+              <td>$121.670.010</td>
+              <td><span class="badge verde">1.78%</span></td>
+              <td><span class="badge verde">Óptima</span></td>
+            </tr>
+            <tr>
+              <td class="left">LKL033</td><td>7</td>
+              <td>$1.885.631</td><td>$269.376</td>
+              <td>$95.189.371</td>
+              <td><span class="badge verde">1.98%</span></td>
+              <td><span class="badge verde">Óptima</span></td>
+            </tr>
+            <tr>
+              <td class="left">LKL713</td><td>7</td>
+              <td>$1.953.551</td><td>$279.079</td>
+              <td>$93.338.328</td>
+              <td><span class="badge verde">2.09%</span></td>
+              <td><span class="badge verde">Óptima</span></td>
+            </tr>
+            <tr>
+              <td class="left">LKL720</td><td>7</td>
+              <td>$2.566.262</td><td>$366.609</td>
+              <td>$103.749.407</td>
+              <td><span class="badge verde">2.47%</span></td>
+              <td><span class="badge verde">Óptima</span></td>
+            </tr>
+            <tr>
+              <td class="left">EQT844</td><td>7</td>
+              <td>$1.889.324</td><td>$269.903</td>
+              <td>$74.519.999</td>
+              <td><span class="badge verde">2.54%</span></td>
+              <td><span class="badge verde">Óptima</span></td>
+            </tr>
+            <tr>
+              <td class="left">LKL034</td><td>7</td>
+              <td>$2.056.691</td><td>$293.813</td>
+              <td>$78.289.499</td>
+              <td><span class="badge verde">2.63%</span></td>
+              <td><span class="badge verde">Óptima</span></td>
+            </tr>
+            <tr>
+              <td class="left">EQT847</td><td>7</td>
+              <td>$2.196.733</td><td>$313.819</td>
+              <td>$78.938.921</td>
+              <td><span class="badge verde">2.78%</span></td>
+              <td><span class="badge verde">Óptima</span></td>
+            </tr>
+            <tr>
+              <td class="left">LKL715</td><td>7</td>
+              <td>$2.136.674</td><td>$305.239</td>
+              <td>$66.415.932</td>
+              <td><span class="badge verde">3.22%</span></td>
+              <td><span class="badge verde">Óptima</span></td>
+            </tr>
+            <tr>
+              <td class="left">NNL906</td><td>7</td>
+              <td>$2.427.197</td><td>$346.742</td>
+              <td>$67.841.827</td>
+              <td><span class="badge verde">3.58%</span></td>
+              <td><span class="badge verde">Óptima</span></td>
+            </tr>
+            <tr>
+              <td class="left">TDZ318</td><td>7</td>
+              <td>$3.519.360</td><td>$502.766</td>
+              <td>$98.035.601</td>
+              <td><span class="badge amarillo">3.59%</span></td>
+              <td><span class="badge amarillo">Moderada</span></td>
+            </tr>
+            <tr>
+              <td class="left">LKL719</td><td>7</td>
+              <td>$2.066.728</td><td>$295.247</td>
+              <td>$54.896.600</td>
+              <td><span class="badge amarillo">3.76%</span></td>
+              <td><span class="badge amarillo">Moderada</span></td>
+            </tr>
+            <tr class="critico">
+              <td class="left">LKL714 &#9888;</td><td>7</td>
+              <td>$4.071.216</td><td>$581.602</td>
+              <td>$95.908.959</td>
+              <td><span class="badge rojo">4.24%</span></td>
+              <td><span class="badge rojo">Alta</span></td>
+            </tr>
+            <tr class="critico">
+              <td class="left">NNL648 &#9888;</td><td>7</td>
+              <td>$2.410.966</td><td>$344.424</td>
+              <td>$48.690.328</td>
+              <td><span class="badge rojo">4.95%</span></td>
+              <td><span class="badge rojo">Alta</span></td>
+            </tr>
+            <tr style="opacity:0.6;">
+              <td class="left">WLW560 *</td><td>7</td>
+              <td>—</td><td>—</td>
+              <td>$75.793.118</td>
+              <td>—</td><td>—</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="left">TOTAL CONSOLIDADO</td>
+              <td>—</td>
+              <td>$37.106.200</td>
+              <td>$5.299.457 prom/ruta</td>
+              <td>$1.463.007.403</td>
+              <td>2.54%</td>
+              <td>—</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <p style="font-size:10.5px; color:#888; margin-top:8px;">* WLW560: sin costo registrado en la fuente. &nbsp;|&nbsp; Criterio semáforo: Verde &lt;3.5% &nbsp;|&nbsp; Amarillo 3.5–4.0% &nbsp;|&nbsp; Rojo &gt;4.0%</p>
+
+      <hr class="divider">
+
+      <!-- Gráfica de barras % costo -->
+      <div class="sub-title" style="margin-top:20px;">% Costo Logístico sobre Ingreso Entregado — por Ruta</div>
+      <div style="margin-top:12px;">
+        <div class="bar-row"><span class="bar-label">STY811</span><div class="bar-track"><div class="bar-fill verde" style="width:3.3%"></div></div><span class="bar-val highlight-green">0.55%</span></div>
+        <div class="bar-row"><span class="bar-label">TNG910</span><div class="bar-track"><div class="bar-fill verde" style="width:7.7%"></div></div><span class="bar-val highlight-green">1.27%</span></div>
+        <div class="bar-row"><span class="bar-label">JYN677</span><div class="bar-track"><div class="bar-fill verde" style="width:9.1%"></div></div><span class="bar-val highlight-green">1.50%</span></div>
+        <div class="bar-row"><span class="bar-label">LKL721</span><div class="bar-track"><div class="bar-fill verde" style="width:10.8%"></div></div><span class="bar-val highlight-green">1.78%</span></div>
+        <div class="bar-row"><span class="bar-label">LKL033</span><div class="bar-track"><div class="bar-fill verde" style="width:12.0%"></div></div><span class="bar-val highlight-green">1.98%</span></div>
+        <div class="bar-row"><span class="bar-label">LKL713</span><div class="bar-track"><div class="bar-fill verde" style="width:12.7%"></div></div><span class="bar-val highlight-green">2.09%</span></div>
+        <div class="bar-row"><span class="bar-label">LKL720</span><div class="bar-track"><div class="bar-fill verde" style="width:15.0%"></div></div><span class="bar-val highlight-green">2.47%</span></div>
+        <div class="bar-row"><span class="bar-label">EQT844</span><div class="bar-track"><div class="bar-fill verde" style="width:15.4%"></div></div><span class="bar-val highlight-green">2.54%</span></div>
+        <div class="bar-row"><span class="bar-label">LKL034</span><div class="bar-track"><div class="bar-fill verde" style="width:15.9%"></div></div><span class="bar-val highlight-green">2.63%</span></div>
+        <div class="bar-row"><span class="bar-label">EQT847</span><div class="bar-track"><div class="bar-fill verde" style="width:16.8%"></div></div><span class="bar-val highlight-green">2.78%</span></div>
+        <div class="bar-row"><span class="bar-label">LKL715</span><div class="bar-track"><div class="bar-fill verde" style="width:19.5%"></div></div><span class="bar-val highlight-green">3.22%</span></div>
+        <div class="bar-row"><span class="bar-label">NNL906</span><div class="bar-track"><div class="bar-fill verde" style="width:21.7%"></div></div><span class="bar-val highlight-green">3.58%</span></div>
+        <div class="bar-row"><span class="bar-label">TDZ318</span><div class="bar-track"><div class="bar-fill" style="width:21.8%; background:#f57f17;"></div></div><span class="bar-val" style="color:#f57f17; font-weight:700;">3.59%</span></div>
+        <div class="bar-row"><span class="bar-label">LKL719</span><div class="bar-track"><div class="bar-fill" style="width:22.8%; background:#f57f17;"></div></div><span class="bar-val" style="color:#f57f17; font-weight:700;">3.76%</span></div>
+        <div class="bar-row"><span class="bar-label">LKL714</span><div class="bar-track"><div class="bar-fill rojo" style="width:25.7%"></div></div><span class="bar-val highlight-red">4.24% &#9888;</span></div>
+        <div class="bar-row"><span class="bar-label">NNL648</span><div class="bar-track"><div class="bar-fill rojo" style="width:30.0%"></div></div><span class="bar-val highlight-red">4.95% &#9888;</span></div>
+      </div>
+      <div style="display:flex; gap:20px; font-size:11px; color:#666; margin-top:12px;">
+        <span>&#9632; <span style="color:#2e7d32">Óptima (&lt;3.5%)</span></span>
+        <span>&#9632; <span style="color:#f57f17">Moderada (3.5%–4.0%)</span></span>
+        <span>&#9632; <span style="color:#E30613">Alta (&gt;4.0%)</span></span>
+        <span style="margin-left:8px; color:#888;">Promedio global: <strong style="color:#003764;">2.54%</strong></span>
+      </div>
+
+    </div>
+  </div>
+
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>Generado por Claude para Fricar S.A.S.</strong> &nbsp;|&nbsp; Dirección Logística — Business Intelligence &nbsp;|&nbsp; 11 de mayo de 2026<br>
+  <span style="font-size:10px;">Fuente: MAYO_CONSOLIDADOS_al_09_mayo.xlsx &nbsp;|&nbsp; Documento de uso interno y confidencial</span>
+</div>
+
+</body>
+</html>
